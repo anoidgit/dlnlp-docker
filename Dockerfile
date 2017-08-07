@@ -136,7 +136,7 @@ RUN pip --no-cache-dir install --upgrade ipython && \
 	python -m ipykernel.kernelspec
 
 # Update lisence for NLPIR
-pynlpir update
+RUN pynlpir update
 
 # Install TensorFlow
 RUN pip --no-cache-dir install \
