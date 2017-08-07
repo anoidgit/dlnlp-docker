@@ -249,6 +249,9 @@ RUN git clone --depth 1 https://github.com/opencv/opencv.git /root/opencv && \
 	ldconfig && \
 	echo 'ln /dev/null /dev/raw1394' >> ~/.bashrc
 
+RUN apt-get autoremove
+RUN apt-get autoclean
+
 # Set up notebook config
 COPY jupyter_notebook_config.py /root/.jupyter/
 
