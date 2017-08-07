@@ -71,7 +71,6 @@ RUN apt-get update && apt-get install -y \
 		libxine2-dev \
 		libtbb-dev \
 		libeigen3-dev \
-    libzmq-dev \
 		python-dev \
 		python-tk \
 		python-numpy \
@@ -211,6 +210,8 @@ ENV LUA_PATH='/root/.luarocks/share/lua/5.1/?.lua;/root/.luarocks/share/lua/5.1/
 	DYLD_LIBRARY_PATH=/root/torch/install/lib:$DYLD_LIBRARY_PATH
 ENV LUA_CPATH='/root/torch/install/lib/?.so;'$LUA_CPATH
 
+RUN apt-get remove -y libzmq3-dev
+RUN apt-get install -y libzmq-dev
 # Install the latest versions of nn, cutorch, cunn, cuDNN bindings and iTorch
 RUN luarocks install nn && \
   luarocks install rnn && \
@@ -233,6 +234,9 @@ RUN luarocks install nn && \
 	cd /root && git clone https://github.com/facebook/iTorch.git && \
 	cd iTorch && \
 	luarocks make
+
+RUN apt-get remove -y libzmq-dev
+RUN apt-get install -y libzmq3-dev
 
 # Install OpenCV
 RUN git clone --depth 1 https://github.com/opencv/opencv.git /root/opencv && \
